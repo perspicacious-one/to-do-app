@@ -32,22 +32,36 @@ function onReady() {
       checkbox.type = "checkbox";
       button.type = "button";
       newLi.textContent = toDo.title;
+      checkbox.checked = toDo.complete;
 
       toDoList.appendChild(newLi);
       newLi.appendChild(checkbox);
       newLi.appendChild(button);
       button.appendChild(buttonText);
-      newLi.addEventListener('click', () => {
+      button.addEventListener('click', () => {
         event.preventDefault();
         toDos.splice(toDos.indexOf(toDo), 1);
         renderTheUI();
       });
+      checkbox.addEventListener('click', () => {
+        event.preventDefault();
+        if (toDo.complete == false) {
+          toDo.complete = true;
+        }
+        else if (toDo.complete == true) {
+          toDo.complete = false;
+        }
+        //alert(toDo.complete);
+        renderTheUI();
+      });
+      
     });
   }
   addToDoForm.addEventListener('submit', () => {
     event.preventDefault();
     createNewToDo();
   });
+
 
   renderTheUI();
 
@@ -68,10 +82,7 @@ function onReady() {
       }
     }
   }
-
 }
-
-
 
 
 window.onload = function() {
